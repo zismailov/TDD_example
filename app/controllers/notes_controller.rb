@@ -12,6 +12,11 @@ class NotesController < ApplicationController
     end
   end
 
+  def show
+    @note = Note.find(params[:id])
+    @description = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(@note.description)
+  end
+
   private
 
   def note_params
