@@ -1,0 +1,36 @@
+<%= @note.errors.full_messages.first if @note.errors.any? %>
+
+<%= form_for(@note) do |f| %>
+  <div class="form-group">
+    <%= f.label :title, "Title" %><br />
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %><br />
+    <%= f.text_field :description, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :privacy %><br />
+    <%= f.select :privacy, Hash[Note.privacies.map{|k,v| [k.split('_').first.capitalize, k]}] %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :featured do %>
+      <%= f.check_box :featured %>
+      Featured notes
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cover_image do %>
+      <%= f.file_field :cover_image, :multiple => true %>
+      Cover image
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Create Notes", class: 'btn btn-primary' %>
+  </div>
+<% end %>
