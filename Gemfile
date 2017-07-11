@@ -17,6 +17,9 @@ gem 'redcarpet'
 
 group :test do
   gem 'capybara'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  #gem 'shoulda-matchers', '~> 2.8'
 end
 
 group :development, :test do
@@ -29,4 +32,5 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'spring-commands-cucumber'
 end
