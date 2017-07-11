@@ -6,7 +6,7 @@ class NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
     if @note.save
-      redirect_to root_url, notice: "Notes has been created"
+      redirect_to note_url(@note), notice: "Notes has been created"
     else
       render :new
     end
@@ -14,7 +14,6 @@ class NotesController < ApplicationController
 
   def show
     @note = Note.find(params[:id])
-    @description = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(@note.description)
   end
 
   private

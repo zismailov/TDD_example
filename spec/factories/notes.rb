@@ -2,12 +2,19 @@ FactoryGirl.define do
   factory :note do
     sequence(:title) {|n| "Note #{n}"}
     description "Note description"
-    privacy Note.privacies[:private_access]
     featured false
     cover_image "image.png"
 
-    factory :public_note do
-      privacy Note.privacies[:public_access]
+    trait :invalid do
+      title nil
+    end
+
+    trait :public_note do
+      privacy :public_access
+    end
+
+    trait :private_note do
+      privacy :private_access
     end
 
   end
