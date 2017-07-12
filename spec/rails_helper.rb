@@ -5,6 +5,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'devise'
+require 'shoulda/matchers'
 require 'support/login_form'
 require 'support/new_note_form'
 
@@ -18,5 +19,7 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 
+  config.include(Shoulda::Matchers::ActiveModel, type: :model)
+  config.include(Shoulda::Matchers::ActiveRecord, type: :model)
   config.include Devise::Test::ControllerHelpers, type: :controller
 end
