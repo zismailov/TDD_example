@@ -16,4 +16,8 @@ class Note < ApplicationRecord
   def silly_title
     "#{title} by #{user.email}"
   end
+
+  def self.by_letter(letter)
+    includes(:user).where("LOWER(title) LIKE ?", "%#{letter.downcase}%").order("users.email")
+  end
 end

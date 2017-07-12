@@ -23,4 +23,22 @@ RSpec.describe Note, type: :model do
       expect(note.silly_title).to eq('New note by test@email.com')
     end
   end
+  
+  describe "class methods" do
+    it 'search by title' do
+      user = FactoryGirl.create(:user)
+      note1 = FactoryGirl.create(:note, :public_note, title: 'Read a book', user: user)
+      note2 = FactoryGirl.create(:note, :public_note, title: 'Show movies about read', user: user)
+      expect(Note.by_letter("R")).to eq([note1, note2])
+    end
+
+    it 'sorts notes by user emails after search' do
+      alber = FactoryGirl.create(:user, email: 'alber@email.com')
+      john = FactoryGirl.create(:user, email: 'john@email.com')
+
+      note2 = FactoryGirl.create(:note, :public_note, title: 'Show movies about read', user: alber)
+      note1 = FactoryGirl.create(:note, :public_note, title: 'Read a book', user: john)
+      expect(Note.by_letter("R")).to eq([note2, note1])
+    end
+  end
 end
