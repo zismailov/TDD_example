@@ -4,6 +4,7 @@ FactoryGirl.define do
     description "Note description"
     featured false
     cover_image "image.png"
+    association :user
 
     trait :invalid do
       title nil

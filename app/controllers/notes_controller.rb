@@ -1,4 +1,7 @@
 class NotesController < ApplicationController
+  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy ]
+  before_action :owner_only, only: [ :edit, :update, :destroy ]
+
   def index
     @notes = Note.public_access
   end
@@ -8,7 +11,7 @@ class NotesController < ApplicationController
   end
 
   def create
-    @note = Note.new(note_params)
+    @note = current_user.notes.new(note_params)
     if @note.save
       redirect_to note_url(@note), notice: "Notes has been created"
     else
@@ -21,11 +24,9 @@ class NotesController < ApplicationController
   end
 
   def edit
-    @note = Note.find(params[:id])
   end
 
   def update
-    @note = Note.find(params[:id])
     if @note.update(note_params)
       redirect_to note_path(@note)
     else
@@ -34,7 +35,7 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    Note.destroy(params[:id])
+    @note.destroy
     redirect_to note_path
   end
 
@@ -42,5 +43,12 @@ class NotesController < ApplicationController
 
   def note_params
     params.require(:note).permit(:title, :description, :privacy, :cover_image, :featured)
+  end
+
+  def owner_only
+    @note = Note.find(params[:id])
+    if current_user != @note.user
+      redirect_to notes_path
+    end
   end
 end

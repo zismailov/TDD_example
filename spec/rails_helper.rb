@@ -5,6 +5,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'devise'
+require 'support/login_form'
 require 'support/new_note_form'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
