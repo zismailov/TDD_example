@@ -20,4 +20,8 @@ class Note < ApplicationRecord
   def self.by_letter(letter)
     includes(:user).where("LOWER(title) LIKE ?", "%#{letter.downcase}%").order("users.email")
   end
+
+  def self.get_public_note
+    #code
+  end
 end
