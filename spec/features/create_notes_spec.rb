@@ -14,6 +14,9 @@ RSpec.feature "Create Notes", type: :feature do
       title: 'My first notes'
     ).submit
 
+    expect(ActionMailer::Base.deliveries.count).to eq(1)
+    expect(ActionMailer::Base.deliveries.last.to).to include(user.email)
+    
     expect(page).to have_content('Notes has been created')
     expect(Note.last.title).to eq('My first notes')
   end

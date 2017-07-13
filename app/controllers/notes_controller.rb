@@ -13,6 +13,7 @@ class NotesController < ApplicationController
   def create
     @note = current_user.notes.new(note_params)
     if @note.save
+      UserMailer.note_created(current_user.email, @note.id).deliver_now
       redirect_to note_url(@note), notice: "Notes has been created"
     else
       render :new
