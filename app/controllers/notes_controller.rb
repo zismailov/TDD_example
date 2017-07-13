@@ -3,7 +3,7 @@ class NotesController < ApplicationController
   before_action :owner_only, only: [ :edit, :update, :destroy ]
 
   def index
-    @notes = Note.public_access
+    @notes = Note.get_public_note
   end
 
   def new
@@ -11,10 +11,12 @@ class NotesController < ApplicationController
   end
 
   def create
-    @note = current_user.notes.new(note_params)
-    if @note.save
-      redirect_to note_url(@note), notice: "Notes has been created"
+    service = NoteCreate.new(note_params, current_user)
+    service.call
+    if service.created?
+      redirect_to note_path(service.note)
     else
+      service.note
       render :new
     end
   end
