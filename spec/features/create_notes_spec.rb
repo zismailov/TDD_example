@@ -11,12 +11,14 @@ RSpec.feature "Create Notes", type: :feature do
 
   scenario 'create new notes with valid data' do
     new_note_form.visit_page.fill_in_with(
-      title: 'My first notes'
+      title: 'My first notes',
+      cover_image: 'cover_image.png'
     ).submit
 
     expect(ActionMailer::Base.deliveries.count).to eq(1)
     expect(ActionMailer::Base.deliveries.last.to).to include(user.email)
-    
+
+    expect(Note.last.cover_image_identifier).to eq('cover_image.png') #cover_image_identifier is 'carrierwave' method
     expect(page).to have_content('Notes has been created')
     expect(Note.last.title).to eq('My first notes')
   end

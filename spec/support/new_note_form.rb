@@ -1,6 +1,6 @@
 class NewNoteForm
   include Capybara::DSL
-  
+
   def visit_page
     visit('/')
     click_on('New Notes')
@@ -12,7 +12,7 @@ class NewNoteForm
     fill_in('Description', with: 'Excellent create my notes')
     select('Public', from: 'Privacy')
     check('Featured notes')
-    attach_file('Cover image', "#{Rails.root}/spec/fixtures/cover_image.png")
+    attach_file('Cover image', "#{Rails.root}/spec/fixtures/" + params.fetch(:cover_image, 'cover_image.png'))
     self
   end
 

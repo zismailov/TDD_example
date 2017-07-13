@@ -15,6 +15,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootstrap-sass'
 gem 'redcarpet'
 gem 'devise'
+gem 'carrierwave'
 
 group :test do
   gem 'capybara'

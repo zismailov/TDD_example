@@ -1,6 +1,6 @@
 <%= @note.errors.full_messages.first if @note.errors.any? %>
 
-<%= form_for(@note) do |f| %>
+<%= form_for @note, html: { multipart: true } do |f| %>
   <div class="form-group">
     <%= f.label :title, "Title" %><br />
     <%= f.text_field :title, class: "form-control" %>
@@ -25,7 +25,7 @@
 
   <div class="form-group">
     <%= f.label :cover_image do %>
-      <%= f.file_field :cover_image, :multiple => true %>
+      <%= f.file_field :cover_image %>
       Cover image
     <% end %>
   </div>
