@@ -6,8 +6,16 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'devise'
 require 'shoulda/matchers'
+require 'vcr'
+
 require 'support/login_form'
 require 'support/new_note_form'
+
+VCR.configure do |c|
+  c.cassette_library_dir = "spec/vcr_cassettes"
+  c.hook_into :webmock
+  c.configure_rspec_metadata!
+end
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 

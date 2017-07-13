@@ -16,12 +16,15 @@ gem 'bootstrap-sass'
 gem 'redcarpet'
 gem 'devise'
 gem 'carrierwave'
+gem 'twitter'
 
 group :test do
   gem 'capybara'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'shoulda-matchers'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development, :test do

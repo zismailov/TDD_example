@@ -14,7 +14,8 @@ class NotesController < ApplicationController
     @note = current_user.notes.new(note_params)
     if @note.save
       UserMailer.note_created(current_user.email, @note.id).deliver_now
-      redirect_to note_url(@note), notice: "Notes has been created"
+      tweet = TwitterService.new.tweet(@note.title)
+      redirect_to note_url(@note), notice: "Notes has been created. We tweeted for you! #{tweet.url}"
     else
       render :new
     end
