@@ -17,6 +17,7 @@ gem 'redcarpet'
 gem 'devise'
 gem 'carrierwave'
 gem 'twitter'
+gem 'active_model_serializers'
 
 group :test do
   gem 'capybara'

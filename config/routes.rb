@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'welcome#index'
-
   resources :notes
+
+  namespace :api do
+    resources :notes, only: [ :index ]
+  end
+
+  root to: 'welcome#index'
 end
