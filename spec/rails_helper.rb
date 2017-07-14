@@ -10,6 +10,8 @@ require 'vcr'
 
 require 'support/login_form'
 require 'support/new_note_form'
+require 'support/note_page'
+require 'support/encouragement_form'
 
 VCR.configure do |c|
   c.cassette_library_dir = "spec/vcr_cassettes"

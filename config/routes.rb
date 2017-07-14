@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :notes
+
+  resources :notes do
+    resources :encouragements, only: [ :new, :create ]
+  end
 
   namespace :api do
     resources :notes, only: [ :index ]

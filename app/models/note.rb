@@ -1,6 +1,7 @@
 class Note < ApplicationRecord
   belongs_to :user
-
+  has_many :encouragements
+  
   validates :user,  presence: true
   validates :title, uniqueness: {
     scope: :user_id,

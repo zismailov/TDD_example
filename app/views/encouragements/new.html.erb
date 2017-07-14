@@ -1,0 +1,4 @@
+<%= form_for @encouragement, url: note_encouragements_path do |f| %>
+  <%= f.text_field :message, class: "form-control", placeholder: "Say something nice..." %>
+  <%= f.submit "Encourage" %>
+<% end %>

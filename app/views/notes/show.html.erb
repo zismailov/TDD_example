@@ -3,3 +3,16 @@
 <div>
   <%= @note.description_html.html_safe %>
 </div>
+
+
+<div class="encouragement">
+  <h2>Encouragements <span id="encouragement-quantity"><%= @note.encouragements.count %></span></h2>
+
+  <ul>
+    <% @note.encouragements.each do |enc| %>
+      <li>Encouragement left by <%= enc.user.email %>: <%= enc.message %></li>
+    <% end %>
+  </ul>
+
+  <%= link_to 'Encourage', new_note_encouragement_path(@note), id: 'encourage-button' %>
+</div>
